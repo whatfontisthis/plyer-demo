@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Plyr YouTube Embed Test</title>
+    <!-- Plyr 스타일시트 -->
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+    <style>
+      body {
+        max-width: 800px;
+        margin: 50px auto;
+        font-family: Arial, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Plyr YouTube 360p Embed Demo</h2>
+
+    <!-- Plyr 유튜브 플레이어 (data 속성 방식) -->
+    <div
+      id="player"
+      data-plyr-provider="youtube"
+      data-plyr-embed-id="bTqVqk7FSmY"
+    ></div>
+
+    <!-- Plyr 및 YouTube Iframe API 스크립트 -->
+    <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+
+    <script>
+      // Plyr 플레이어 초기화
+      const player = new Plyr("#player");
+
+      // 유튜브 화질 설정 시도
+      player.on("ready", () => {
+        const youtubePlayer = player.embed; // 내부 YouTube IFrame API 객체
+        if (
+          youtubePlayer &&
+          typeof youtubePlayer.setPlaybackQuality === "function"
+        ) {
+          youtubePlayer.setPlaybackQuality("medium"); //360p
+        }
+      });
+    </script>
+  </body>
+</html>
